@@ -1,0 +1,54 @@
+
+
+
+def readDatasetfile(file):
+    f = open(file, "r")
+    return  f
+def readtext(file):
+    words=file.split(" ")
+    return words
+def readDataSet(f):
+    i=0
+    for line in f :
+        t=line.split(":")
+        words[i]={
+            "word" : t[0],
+            "numberofaccurence" : t[1],
+            "total number" : t [2]
+        }
+        i=i+1
+def updatedataset(words,wordname):
+    i=0
+    for word in words:
+        if (wordname == word["word"]) :
+            word["numberofaccurence"]= str(int(word["numberofaccurence"])+1)
+            word["total number"] = str(int(word["total number"]) + 1)
+            i=1
+    if (i==0):
+        words[len(words)+1]={
+            "word" : wordname,
+            "numberofaccurence" : 1,
+            "total number" : 1
+        }
+
+def searchindataset(words,wordname):
+    i=0
+    for word in words:
+        if (wordname == word["word"]) :
+            i=1
+    return i
+
+def writedatasetfile(filename,words):
+    f= open(filename, "w+")
+    for word in words :
+        f.write(word["word"]+":"+word["numberofaccurence"]+":"+word["total number"])
+    f.close()
+
+def main():
+    file=readDatasetfile("text.txt")
+    dataset=readDatasetfile("dataset.txt")
+    words = readtext(file.readlines())
+    datasetwords=readDataSet(dataset.readlines())
+    for word in words:
+        updatedataset(datasetwords,word)
+    writedatasetfile("dataset.txt",datasetwords)
